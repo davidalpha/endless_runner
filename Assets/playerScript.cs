@@ -12,15 +12,22 @@ public class playerScript : MonoBehaviour {
 	private bool grounded = false;
 	private bool dblJump = true;
 
+	public GameObject particStars; //defined in inspector (ParticleStars)
+
 	void Start(){
 	}
 
 	void FixedUpdate() {
-		if (powerLvl > 0){
-			if (Input.GetKey(KeyCode.X)){
+		Debug.Log (particStars);
+		if (powerLvl > 0 && Input.GetKey(KeyCode.X)){
 			rigidbody.AddForce (boostForce, ForceMode.Impulse);
 			powerLvl -= 0.1f;
+			//Particles
+			particStars.particleSystem.enableEmission = true;
 			}
+		else {
+			//Particles
+			particStars.particleSystem.enableEmission = false;
 		}
 
 		if (grounded) {

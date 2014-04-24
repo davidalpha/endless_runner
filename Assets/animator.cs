@@ -9,8 +9,6 @@ public class animator : MonoBehaviour {
 	GameObject pl;
 	GameObject partic;
 
-	ParticleSystem _partic;
-
 	// Use this for initialization
 	void Start () {
 		pl = GameObject.FindWithTag("Player");
