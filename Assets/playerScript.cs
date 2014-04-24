@@ -15,8 +15,11 @@ public class playerScript : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (Input.GetKey(KeyCode.X)){
+		if (powerLvl > 0){
+			if (Input.GetKey(KeyCode.X)){
 			rigidbody.AddForce (boostForce, ForceMode.Impulse);
+			powerLvl -= 0.1f;
+			}
 		}
 
 		if (grounded) {
