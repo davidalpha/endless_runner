@@ -7,31 +7,37 @@ public class playerScript : MonoBehaviour {
 	public Vector3 jumpForce = new Vector3 (0f, 5f, 0f);
 	private bool grounded = false;
 	private bool dblJump = true;
-	
+
+	void Start(){
+	}
+
 	void FixedUpdate() {
-			if (grounded) {
-						rigidbody.AddForce (speed, ForceMode.Acceleration);
+		if (Input.GetKey("space")){
+			Debug.Log (rigidbody.velocity);
+		}
+		if (grounded) {
+					rigidbody.AddForce (speed, ForceMode.Acceleration);
 
-						if (Input.GetButtonDown ("Jump")) {
-								rigidbody.AddForce (jumpForce, ForceMode.VelocityChange);
-						    
-						}
-			}
+					if (Input.GetButtonDown ("Jump")) {
+						rigidbody.AddForce (jumpForce, ForceMode.VelocityChange);
+					    
+					}
+		}
 
-			if (!grounded & dblJump) {
-								
-				if (Input.GetButtonDown ("Jump")) {
-					rigidbody.AddForce (jumpForce, ForceMode.VelocityChange);
-					dblJump = false;
-				}
-				
+		if (!grounded & dblJump) {
+							
+			if (Input.GetButtonDown ("Jump")) {
+				rigidbody.AddForce (jumpForce, ForceMode.VelocityChange);
+				dblJump = false;
 			}
 			
-			if (transform.position.y < -5) {
-			Application.LoadLevel(Application.loadedLevel);
-			grounded = false;
+		}
+		
+		if (transform.position.y < -5) {
+		Application.LoadLevel(Application.loadedLevel);
+		grounded = false;
 
-			}
+		}
 	 }
 	void OnCollisionEnter(Collision obj) {
 				grounded = true;

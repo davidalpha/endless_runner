@@ -48,7 +48,7 @@ public class groundScript : MonoBehaviour {
 			float newXscale = Random.Range (minScale, maxScale);
 			Vector3 newScale = new Vector3 (newXscale, tempGround.transform.localScale.y, tempGround.transform.localScale.z);
 			tempGround.transform.localScale = newScale;
-
+			
 			float newX = nextPosition.x + tempGround.transform.localScale.x + Random.Range (minGapX, maxGapX);
 			float newY = nextPosition.y + tempGround.transform.localScale.y + Random.Range (minGapY, maxGapY);
 			//if (newY < minY) {
