@@ -50,13 +50,14 @@ public class groundScript : MonoBehaviour {
 			tempGround.transform.localScale = newScale;
 			
 			float newX = nextPosition.x + tempGround.transform.localScale.x + Random.Range (minGapX, maxGapX);
-			float newY = nextPosition.y + tempGround.transform.localScale.y + Random.Range (minGapY, maxGapY);
-			//if (newY < minY) {
-			//	newY = minY;
-			//	}
-			//if (newY > maxY) {
-			//	newY = maxY;
-			//}
+			float newY = Random.Range (minGapX, maxGapX);
+
+			if (newY < 1) {
+				newY = minY;
+				}
+			if (newY > 10) {
+				newY = maxY;
+				}
 
 			nextPosition = new Vector3 (newX, newY, 0f);
 			front += 1;
