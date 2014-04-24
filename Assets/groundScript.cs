@@ -3,7 +3,9 @@ using System.Collections;
 
 public class groundScript : MonoBehaviour {
 
-	public GameObject prefab;
+	public GameObject normalGround;
+	public GameObject bouncyGround;
+	public GameObject temp;
 	public GameObject powerUp;
 	public int numberOfObjects = 10;
 	public Vector3 startPosition = new Vector3 (0f, 0f, 0f);
@@ -26,9 +28,13 @@ public class groundScript : MonoBehaviour {
 	void Start () {
 		 ground = new GameObject[numberOfObjects];
 		 for (int i = 0; i < numberOfObjects; i++) {
-			 GameObject temp = Instantiate (prefab, startPosition, Quaternion.identity) as GameObject;
+			if( Random.value > .3){
+				temp = Instantiate (normalGround, startPosition, Quaternion.identity) as GameObject;
+			} else {
+				temp = Instantiate (bouncyGround, startPosition, Quaternion.identity) as GameObject;
+			}
 			 ground [i] = temp;
-				 }
+		 }
 		for (int i = 0; i < numberOfObjects; i++) {
 				rePosition (i);
 				}
