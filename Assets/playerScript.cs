@@ -50,50 +50,5 @@ public class playerScript : MonoBehaviour {
 		Destroy(powerUp.gameObject);
 		audio.Play();
 	}
-	//this ray will generate a vector which points from the center of 
-	//the falling object TO object hit. You subtract where you want to go from where you are
-	
-	var Ray MyRay = player.position - prefab.position;
-	
-	//this will declare a variable which will store information about the object hit
-	RaycastHit MyRayHit; 
-	
-	//this is the actual raycast
-	Physics.raycast(MyRay, out MyRayHit);
-	
-	//this will get the normal of the point hit, if you dont understand what a normal is 
-	//wikipedia is your friend, its a simple idea, its a line which is tangent to a plane
-	
-	Vector3 MyNormal = MyRayHit.normal;
-	
-	//this will convert that normal from being relative to global axis to relative to an
-	//objects local axis
-	
-	MyNormal = MyRayHit.transform.transformdirection(MyNormal);
-	
-	//this next line will compare the normal hit to the normals of each plane to find the 
-	//side hit
-	
-	if(MyNormal == MyRayHit.transform.up)
-	{
-		grounded = true;
-		dblJump = true;
-	}
-	//important note the use of the '-' sign this inverts the direction, -up == down. Down doesn't exist as a stored direction, you invert up to get it. 
-	
-	if(MyNormal == -MyRayHit.transform.up)
-	{
-	}
-	if(MyNormal == MyRayHit.transform.right)
-	{
-		grounded = true;
-		dblJump = true;
-	}
-	//note the '-' sign converting right to left
-	if(MyNormal == -MyRayHit.transform.right)
-	{
-		grounded = true;
-		dblJump = true;
-	}
 
 }
