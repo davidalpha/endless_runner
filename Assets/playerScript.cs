@@ -4,6 +4,7 @@ using System.Collections;
 public class playerScript : MonoBehaviour {
 
 	public Vector3 speed = new Vector3 (5f, 0f, 0f);
+	public Vector3 accelGroundForce = new Vector3 (1f, 1f, 0f);
 	public Vector3 jumpForce = new Vector3 (0f, 5f, 0f);
 	public Vector3 boostForce = new Vector3 (0f, 0f, 5f);
 	public float powerLvl = 0;
@@ -45,13 +46,23 @@ public class playerScript : MonoBehaviour {
 
 		}
 	 }
-	void OnCollisionEnter(Collision prefab) {
-				grounded = true;
-				dblJump = true;
+
+
+	void OnCollisionEnter(Collision collision) {
+		grounded = true;
+		dblJump = true;
+
+		Debug.Log(collision.gameObject.name);
+		
+		if (collision.gameObject.name == "accelGround(Clone)") {
+			rigidbody.AddForce (accelGroundForce, ForceMode.Impulse);
 		}
+	}
+
 	void OnCollisionExit(Collision prefab){
 		grounded = false;
-		}
+	}
+
 	void OnTriggerEnter(Collider powerUp){
 		Destroy(powerUp.gameObject);
 		audio.Play();
