@@ -51,6 +51,7 @@
      <Compile Include="Assets\animator.cs" />
      <Compile Include="Assets\groundScript.cs" />
      <Compile Include="Assets\playerScript.cs" />
+     <Compile Include="Assets\powerBarScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

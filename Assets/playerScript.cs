@@ -5,6 +5,9 @@ public class playerScript : MonoBehaviour {
 
 	public Vector3 speed = new Vector3 (5f, 0f, 0f);
 	public Vector3 jumpForce = new Vector3 (0f, 5f, 0f);
+	public Vector3 boostForce = new Vector3 (0f, 0f, 5f);
+	public float powerLvl = 0;
+
 	private bool grounded = false;
 	private bool dblJump = true;
 
@@ -12,15 +15,15 @@ public class playerScript : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (Input.GetKey("space")){
-			Debug.Log (rigidbody.velocity);
+		if (Input.GetKey(KeyCode.X)){
+			rigidbody.AddForce (boostForce, ForceMode.Impulse);
 		}
+
 		if (grounded) {
 					rigidbody.AddForce (speed, ForceMode.Acceleration);
 
 					if (Input.GetButtonDown ("Jump")) {
 						rigidbody.AddForce (jumpForce, ForceMode.VelocityChange);
-					    
 					}
 		}
 
@@ -49,6 +52,7 @@ public class playerScript : MonoBehaviour {
 	void OnTriggerEnter(Collider powerUp){
 		Destroy(powerUp.gameObject);
 		audio.Play();
+		powerLvl += 1;
 	}
 
 }
