@@ -28,6 +28,7 @@ public class animator : MonoBehaviour {
 			anim.SetBool("PlayerIdle", false);
 			anim.SetBool("PlayerJump", false);
 			anim.SetBool("PlayerHurt", false);
+			anim.SetBool("PlayerBoost", false);
 		}
 		//Jumping
 		if (roundedVelocityY > 0){
@@ -35,6 +36,7 @@ public class animator : MonoBehaviour {
 			anim.SetBool("PlayerWalk", false);
 			anim.SetBool("PlayerIdle", false);
 			anim.SetBool("PlayerHurt", false);
+			anim.SetBool("PlayerBoost", false);
 
 		}
 		//Falling
@@ -43,6 +45,7 @@ public class animator : MonoBehaviour {
 			anim.SetBool("PlayerJump", false);
 			anim.SetBool("PlayerWalk", false);
 			anim.SetBool("PlayerIdle", false);
+			anim.SetBool("PlayerBoost", false);
 
 		}
 		//Used for double jump
@@ -51,6 +54,16 @@ public class animator : MonoBehaviour {
 			anim.SetBool("PlayerIdle", false);
 			anim.SetBool("PlayerJump", false);
 			anim.SetBool("PlayerHurt", false);
+			anim.SetBool("PlayerBoost", false);
+		}
+
+		//Used for boosting
+		if (Input.GetButtonDown ("Boost")) {
+			anim.SetBool("PlayerWalk", false);
+			anim.SetBool("PlayerIdle", false);
+			anim.SetBool("PlayerJump", false);
+			anim.SetBool("PlayerHurt", false);
+			anim.SetBool("PlayerBoost", true);
 		}
 
 		//Set animation speed to velocity player

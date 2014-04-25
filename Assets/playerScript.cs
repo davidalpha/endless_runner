@@ -19,7 +19,7 @@ public class playerScript : MonoBehaviour {
 
 	void FixedUpdate() {
 		Debug.Log (particStars);
-		if (powerLvl > 0 && Input.GetKey(KeyCode.X)){
+		if (powerLvl > 0 && Input.GetKey("Boost")){
 			rigidbody.AddForce (boostForce, ForceMode.Impulse);
 			powerLvl -= 0.1f;
 			//Particles
