@@ -7,27 +7,30 @@ public class playerScript : MonoBehaviour {
 	public Vector3 accelGroundForce = new Vector3 (1f, 1f, 0f);
 	public Vector3 jumpForce = new Vector3 (0f, 5f, 0f);
 	public Vector3 boostForce = new Vector3 (0f, 0f, 5f);
-	public float powerLvl = 0;
+	public float powerLvl;
 
 	private bool grounded = false;
 	private bool dblJump = true;
 
-	public GameObject particStars; //defined in inspector (ParticleStars)
+	public GameObject spriteObject; //defined in inspector (ParticleStars) 
+
+	private animator animatorScript;
+
 
 	void Start(){
+		//get script component from spriteObject PlayerSprite GameObject
+		animatorScript = spriteObject.GetComponent<animator> ();
 	}
 
 	void FixedUpdate() {
-		Debug.Log (particStars);
-		if (powerLvl > 0 && Input.GetKey("Boost")){
+		if (powerLvl > 0 && Input.GetButton("Boost")){
 			rigidbody.AddForce (boostForce, ForceMode.Impulse);
 			powerLvl -= 0.1f;
-			//Particles
-			particStars.particleSystem.enableEmission = true;
+			//call function Boost() for Boost particles + animation from animator.cs
+			animatorScript.Boost(true);
 			}
 		else {
-			//Particles
-			particStars.particleSystem.enableEmission = false;
+			animatorScript.Boost(false);
 		}
 
 		if (grounded) {

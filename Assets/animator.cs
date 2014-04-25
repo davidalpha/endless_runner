@@ -5,15 +5,19 @@ public class animator : MonoBehaviour {
 
 	public float animSpeed;
 
-	Animator anim;
-	GameObject pl;
-	GameObject partic;
+	private Animator anim;
+	private bool boostCheck;
+
+	public GameObject pl;
+	public GameObject partic;
+	public GameObject particStars;
 
 	// Use this for initialization
 	void Start () {
-		pl = GameObject.FindWithTag("Player");
-		partic = GameObject.FindWithTag("Particles");
+		//pl = GameObject.FindWithTag("Player");
+		//partic = GameObject.FindWithTag("Particles");
 		anim = GetComponent<Animator>();
+		boostCheck = false;
 	}
 	
 	// Update is called once per frame
@@ -23,7 +27,7 @@ public class animator : MonoBehaviour {
 
 
 		//Walking
-		if (pl.rigidbody.velocity.x > 0 && roundedVelocityY == 0){
+		if (pl.rigidbody.velocity.x > 0 && roundedVelocityY == 0 && boostCheck == false){
 			anim.SetBool("PlayerWalk", true);
 			anim.SetBool("PlayerIdle", false);
 			anim.SetBool("PlayerJump", false);
@@ -31,7 +35,7 @@ public class animator : MonoBehaviour {
 			anim.SetBool("PlayerBoost", false);
 		}
 		//Jumping
-		if (roundedVelocityY > 0){
+		if (roundedVelocityY > 0 && boostCheck == false){
 			anim.SetBool("PlayerJump", true);
 			anim.SetBool("PlayerWalk", false);
 			anim.SetBool("PlayerIdle", false);
@@ -40,7 +44,7 @@ public class animator : MonoBehaviour {
 
 		}
 		//Falling
-		if (roundedVelocityY < 0){
+		if (roundedVelocityY < 0 && boostCheck == false){
 			anim.SetBool("PlayerHurt", true);
 			anim.SetBool("PlayerJump", false);
 			anim.SetBool("PlayerWalk", false);
@@ -49,23 +53,23 @@ public class animator : MonoBehaviour {
 
 		}
 		//Used for double jump
-		if (Input.GetButtonDown ("Jump")) {
+		if (Input.GetButtonDown ("Jump") && boostCheck == false) {
 			anim.SetBool("PlayerWalk", true);
 			anim.SetBool("PlayerIdle", false);
 			anim.SetBool("PlayerJump", false);
 			anim.SetBool("PlayerHurt", false);
 			anim.SetBool("PlayerBoost", false);
 		}
-
+		/*
 		//Used for boosting
-		if (Input.GetButtonDown ("Boost")) {
+		if (pl.boostForce)) {
 			anim.SetBool("PlayerWalk", false);
 			anim.SetBool("PlayerIdle", false);
 			anim.SetBool("PlayerJump", false);
 			anim.SetBool("PlayerHurt", false);
 			anim.SetBool("PlayerBoost", true);
 		}
-
+*/
 		//Set animation speed to velocity player
 		anim.speed = pl.rigidbody.velocity.x * animSpeed/10;
 
@@ -81,4 +85,23 @@ public class animator : MonoBehaviour {
 
 
 	}
+	public void Boost (bool a){
+		if (a == true){
+			particStars.particleSystem.enableEmission = true;
+			anim.SetBool("PlayerWalk", false);
+			anim.SetBool("PlayerIdle", false);
+			anim.SetBool("PlayerJump", false);
+			anim.SetBool("PlayerHurt", false);
+			anim.SetBool("PlayerBoost", true);
+			boostCheck = true;
+			Debug.Log ("Player is Boosting");
+		}
+		else {
+			particStars.particleSystem.enableEmission = false;
+			anim.SetBool("PlayerBoost", false);
+			boostCheck = false;
+			Debug.Log ("Player is NOT Boosting");
+		}
+	}
+
 }
